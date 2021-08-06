@@ -1,0 +1,27 @@
+blueprint:
+  name: Decrement Counter
+  description: Decrement Counter until time to empty bin
+  domain: automation
+  input:
+    counter:
+      name: Counter
+      description: This counter keep tracks of how many cleans are left
+      selector:
+        target:
+          entity:
+            domain: counter
+    vacuum:
+      name: Vacuum
+      description: The vacuum
+      selector:
+        entity:
+          domain: vacuum
+
+trigger:
+  - platform: state
+    entity_id: !input vacuum
+    to: 'returning'
+
+action:
+  - service: counter.decrement
+    target: !input counter

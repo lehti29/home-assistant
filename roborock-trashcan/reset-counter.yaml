@@ -1,0 +1,32 @@
+blueprint:
+  name: Reset Counter
+  description: Reset counter when vacuum has been emptied on dust and has returned to dock
+  domain: automation
+  input:
+    counter:
+      name: Counter
+      description: This counter keep tracks of how many cleans are left
+      selector:
+          entity:
+            domain: counter
+    vacuum:
+      name: Vacuum
+      description: The vacuum
+      selector:
+        entity:
+          domain: vacuum
+
+trigger:
+  - platform: state
+    entity_id: !input vacuum
+    to: docked
+
+condition:
+  - condition: state
+    entity_id: !input counter
+    state: '0'
+
+action:
+  - service: counter.reset
+    target:
+      entity_id: !input counter

@@ -1,0 +1,53 @@
+blueprint:
+  name: Go to trashcan
+  description: Send the vacuum to defined coordinates
+  domain: automation
+  input:
+    xcoord:
+      name: X-coordinate
+      description: ''
+    ycoord:
+      name: Y-coordinate
+      description: ''
+    counter:
+      name: Counter
+      description: This counter keep tracks of how many cleans are left
+      selector:
+          entity:
+            domain: counter
+    vacuum:
+      name: Vacuum
+      description: The vacuum
+      selector:
+        entity:
+          domain: vacuum
+
+trigger:
+  - platform: state
+    entity_id: !input counter
+    from: '1'
+    to: '0'
+
+action:
+  - service: vacuum.pause
+    target:
+      entity_id: !input vacuum
+  - service: persistent_notification.create
+    data:
+      title: Empty bin
+      message: It's now time to empty the dust bin
+  - service: notify.notify
+    data:
+      message: It's now time to empty the dust bin
+      title: Empty bin
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 1
+      milliseconds: 0
+  - service: xiaomi_miio.vacuum_goto
+    target:
+      entity_id: !input vacuum
+    data:
+      x_coord: !input xcoord
+      y_coord: !input ycoord
