@@ -1,5 +1,5 @@
 
-#Roboroch trashcan
+# Roborock trashcan
 
 Assumes you have the Xiamio home integration installed.
 
