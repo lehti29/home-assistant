@@ -9,9 +9,9 @@ How to use these blueprints:
     2. Press "Add Helper"
     3. Choose Counter
     4. Choose a nice name
-    5. Set minimum value to 0, and Maximum value to N -1, where N equals after how many cleanings you want to send the vacuum to your trashcan. Set Ininitial value to the same as maximum value
+    5. Set minimum value to 0, and Maximum value to N, where N equals after how many cleanings you want to send the vacuum to your trashcan. Set Ininitial value to N as well
     6. Choose Stepsize to 1
-    7. Create
+    7. Choose "Create"
 2. Go to Configuration -> Blueprints.
 3. Add The url for each blueprint:
     1. https://github.com/lehti29/home-assistant/blob/main/roborock-trashcan/decrement-counter.yaml
